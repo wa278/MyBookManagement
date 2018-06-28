@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bookmanagement.dao.BookDao">
+    <select id="queryById" resultType="Book" parameterType="java.lang.Long" >
+        SELECT book_id,name,number
+        FROM book
+        where book_id = #{bookId}
+    </select>
+    <select id="queryAll" resultType="Book">
+        SELECT
+        book_id,name,number from book order By book_id limit #{offset},#{limit}
+    </select>
+    <update id="reduceNumber">
+        update book
+        set number  = number -1
+        where
+        book_id = #{bookId}
+        AND number >0
+    </update>
+</mapper>
